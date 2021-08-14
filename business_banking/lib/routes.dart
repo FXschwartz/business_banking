@@ -4,6 +4,7 @@ import 'package:business_banking/features/hub/ui/hub_screen.dart';
 import 'package:business_banking/features/login/ui/login_feature_widget.dart';
 import 'package:business_banking/features/new_online_registration_form/ui/new_online_registration_form_entry/new_online_registration_widget.dart';
 import 'package:business_banking/features/new_online_registration_form/ui/new_online_registration_success_screen/new_online_registration_success_widget.dart';
+import 'package:business_banking/features/support_request/ui/support_request_form/support_request_form_widget.dart';
 import 'package:flutter/material.dart';
 
 import 'features/credit_card/ui/payment_request/credit_card_payment_request_widget.dart';
@@ -30,6 +31,7 @@ abstract class BusinessBankingRouter {
   static const String depositCheckRoute = '/depositCheck';
   static const String depositCheckConfirmRoute = '/depositCheckConfirm';
   static const String NewSuccessScreen = '/NewSuccessScreen';
+  static const String supportRequestFormRoute = '/supportRequestForm';
 
   static Widget generate(String name) {
     switch (name) {
@@ -62,6 +64,9 @@ abstract class BusinessBankingRouter {
 
       case NewSuccessScreen:
         return NewOnlineRegistrationRequestSuccessWidget();
+
+      case supportRequestFormRoute:
+        return SupportRequestFormWidget();
       default:
         return const PageNotFound();
     }
