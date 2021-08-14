@@ -4,12 +4,15 @@ import 'package:business_banking/features/support_request/ui/support_request_for
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class SupportRequestFormScreen extends Screen {
   final SupportRequestViewModel viewModel;
   final SupportRequestFormActions actions;
 
   SupportRequestFormScreen({required this.viewModel, required this.actions});
+  final _supportRequestFormGlobalKey = GlobalKey<FormBuilderState>();
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +40,117 @@ class SupportRequestFormScreen extends Screen {
           ],
         ),
       ),
-      body: Container(
-        padding: EdgeInsets.all(5.0),
-        child: Center(
-          child: Text('Support Request Form Screen'),
+      body: FormBuilder(
+        key: _supportRequestFormGlobalKey,
+        child: Container(
+          padding: EdgeInsets.all(20.0),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                    'Submit a support request with a title, the email address you would like to support to contact you, and then a brief description of what you would like help with.'),
+                SupportRequestInputTextField(
+                  formFieldName: 'titleInput',
+                  hintText: 'Title',
+                  initialValue: viewModel.title,
+                  onChanged: (value) {},
+                ),
+                SupportRequestInputTextField(
+                    formFieldName: 'emailInput',
+                    hintText: 'Email Address',
+                    keyboardType: TextInputType.emailAddress,
+                    initialValue: viewModel.email,
+                    onChanged: (value) {}),
+                SupportRequestInputTextField(
+                  formFieldName: 'bodyInput',
+                  hintText: 'Description',
+                  keyboardType: TextInputType.multiline,
+                  maxTextLines: 10,
+                  initialValue: viewModel.body,
+                  onChanged: (value) {},
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    OutlinedButton(
+                      key: Key('supportRequestFormSubmitButton'),
+                      child: Text(
+                        'Submit Request',
+                        style: TextStyle(
+                            color: Colors.green,
+                            // fontWeight: FontWeight.bold,
+                            fontSize: 20),
+                      ),
+                      style: OutlinedButton.styleFrom(
+                          padding: EdgeInsets.all(10.0),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          side: BorderSide(width: 2, color: Colors.green)),
+                      onPressed: () {
+                        // this.actions.navigateToSupportRequestForm(context);
+                        String? email = _supportRequestFormGlobalKey
+                            .currentState!.fields['emailInput']!.value;
+                        String? title = _supportRequestFormGlobalKey
+                            .currentState!.fields['titleInput']!.value;
+                        String? body = _supportRequestFormGlobalKey
+                            .currentState!.fields['bodyInput']!.value;
+                        print('body: $body');
+                        actions.updateSupportRequestForm(
+                            context, title!, email!, body!);
+                      },
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
         ),
+      ),
+    );
+  }
+}
+
+class SupportRequestInputTextField extends StatelessWidget {
+  final String formFieldName;
+  final String hintText;
+  final TextInputType keyboardType;
+  final int maxTextLines;
+  final String initialValue;
+  final void Function(String?)? onChanged;
+  const SupportRequestInputTextField({
+    Key? key,
+    required this.formFieldName,
+    required this.hintText,
+    required this.onChanged,
+    required this.initialValue,
+    this.keyboardType = TextInputType.text,
+    this.maxTextLines = 1,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(top: 10),
+      child: FormBuilderTextField(
+        initialValue: initialValue,
+        maxLines: maxTextLines,
+        keyboardType: keyboardType,
+        name: formFieldName,
+        decoration: InputDecoration(
+          border: OutlineInputBorder(
+            borderRadius: const BorderRadius.all(
+              const Radius.circular(
+                10.0,
+              ),
+            ),
+          ),
+          filled: true,
+          hintStyle: TextStyle(color: Colors.grey[800]),
+          hintText: hintText,
+          fillColor: Colors.white70,
+        ),
+        onChanged: onChanged,
       ),
     );
   }

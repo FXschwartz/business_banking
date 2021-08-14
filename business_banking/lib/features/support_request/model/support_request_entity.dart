@@ -6,6 +6,7 @@ class SupportRequestEntity extends Entity {
   final String email;
 
   SupportRequestEntity({
+    // TODO: Figure out if I need this errors field
     List<EntityFailure> errors = const [],
     String? title,
     String? body,
@@ -34,6 +35,7 @@ class SupportRequestEntity extends Entity {
       errors: errors ?? this.errors,
       title: title ?? this.title,
       email: email ?? this.email,
+      body: body ?? this.body,
     );
   }
 }

@@ -64,7 +64,7 @@ class SupportRequestScreen extends Screen {
                       ),
                       style: OutlinedButton.styleFrom(
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15)),
+                              borderRadius: BorderRadius.circular(5)),
                           side: BorderSide(width: 2, color: Colors.green)),
                       onPressed: () {
                         this.actions.navigateToSupportRequestForm(context);
