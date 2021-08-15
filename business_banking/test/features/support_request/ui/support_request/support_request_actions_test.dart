@@ -6,4 +6,41 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-void main() {}
+class MockNavigatorObserver extends Mock implements NavigatorObserver {}
+
+class SupportRequestActionsMock extends Mock implements SupportRequestActions {}
+
+void main() {
+  SupportRequestViewModel viewModel;
+  SupportRequestActionsMock actions = SupportRequestActionsMock();
+  Widget testWidget;
+  final mockObserver = MockNavigatorObserver();
+
+  setUp(() {
+    viewModel = SupportRequestViewModel(
+      allSupportRequests: [],
+    );
+    actions = SupportRequestActionsMock();
+    testWidget = MaterialApp(
+      home: SupportRequestScreen(
+        viewModel: viewModel,
+        actions: actions,
+      ),
+      navigatorObservers: [mockObserver],
+    );
+  });
+
+  tearDown(() {
+    viewModel = null;
+    actions = null;
+    testWidget = null;
+  });
+
+  testWidgets('should navigate to SupportRequestFormScreen', (tester) async {
+    await tester.pumpWidget(testWidget);
+    await tester.tap(find.byKey(const Key('supportRequestNavButton')));
+    await tester.pumpAndSettle();
+    verify(actions.navigateToSupportRequestForm(any)).called(1);
+    verify(mockObserver.didPush(any, any));
+  });
+}

@@ -52,18 +52,21 @@ class SupportRequestFormScreen extends Screen {
                     'Submit a support request with a title, the email address you would like to support to contact you, and then a brief description of what you would like help with.'),
                 SupportRequestInputTextField(
                   formFieldName: 'titleInput',
+                  key: Key('titleInput'),
                   hintText: 'Title',
                   initialValue: '',
                   onChanged: (value) {},
                 ),
                 SupportRequestInputTextField(
                     formFieldName: 'emailInput',
+                    key: Key('emailInput'),
                     hintText: 'Email Address',
                     keyboardType: TextInputType.emailAddress,
                     initialValue: '',
                     onChanged: (value) {}),
                 SupportRequestInputTextField(
                   formFieldName: 'bodyInput',
+                  key: Key('bodyInput'),
                   hintText: 'Description',
                   keyboardType: TextInputType.multiline,
                   maxTextLines: 10,
@@ -91,16 +94,17 @@ class SupportRequestFormScreen extends Screen {
                                 borderRadius: BorderRadius.circular(10)),
                             side: BorderSide(width: 2, color: Colors.green)),
                         onPressed: () {
+                          // TODO: This needs to be tested
                           // this.actions.navigateToSupportRequestForm(context);
-                          String? email = _supportRequestFormGlobalKey
-                              .currentState!.fields['emailInput']!.value;
-                          String? title = _supportRequestFormGlobalKey
-                              .currentState!.fields['titleInput']!.value;
-                          String? body = _supportRequestFormGlobalKey
-                              .currentState!.fields['bodyInput']!.value;
-                          print('body: $body');
-                          actions.updateSupportRequestForm(
-                              context, title!, email!, body!);
+                          // String? email = _supportRequestFormGlobalKey
+                          //     .currentState!.fields['emailInput']!.value;
+                          // String? title = _supportRequestFormGlobalKey
+                          //     .currentState!.fields['titleInput']!.value;
+                          // String? body = _supportRequestFormGlobalKey
+                          //     .currentState!.fields['bodyInput']!.value;
+                          // print('body: $body');
+                          // actions.updateSupportRequestForm(
+                          //     context, title!, email!, body!);
                         },
                       ),
                     ],
@@ -114,9 +118,8 @@ class SupportRequestFormScreen extends Screen {
                 Container(
                   height:
                       500, // TODO: Change this to just be an array of widgets instead of a listview
-                  child: ListView.separated(
+                  child: ListView.builder(
                     itemCount: viewModel.allSupportRequests.length,
-                    separatorBuilder: (_, index) => Divider(),
                     itemBuilder: (_, index) => Card(
                       key: Key('previousSupportRequest'),
                       color: Colors.white,

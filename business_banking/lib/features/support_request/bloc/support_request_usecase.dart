@@ -19,15 +19,15 @@ class SupportRequestUseCase extends UseCase {
         .create<SupportRequestEntity>(
             SupportRequestEntity(), _notifySubscribers);
 
-    if (_scopeSupportRequestEntity == null) {
-      final newSupportRequestEntity = SupportRequestEntity();
-      _scopeSupportRequestEntity = ExampleLocator()
-          .repository
-          .create<SupportRequestEntity>(
-              newSupportRequestEntity, _notifySubscribers);
-    } else {
-      _scopeSupportRequestEntity!.subscription = _notifySubscribers;
-    }
+    // if (_scopeSupportRequestEntity == null) {
+    //   final newSupportRequestEntity = SupportRequestEntity();
+    //   _scopeSupportRequestEntity = ExampleLocator()
+    //       .repository
+    //       .create<SupportRequestEntity>(
+    //           newSupportRequestEntity, _notifySubscribers);
+    // } else {
+    //   _scopeSupportRequestEntity!.subscription = _notifySubscribers;
+    // }
 
     await ExampleLocator().repository.runServiceAdapter(
         _scopeSupportRequestEntity!, SupportRequestServiceAdapter());

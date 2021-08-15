@@ -21,15 +21,15 @@ class SupportRequestViewUpdateRequestEvent extends SupportRequestViewEvents {
   bool get stringify => true;
 }
 
-class SupportRequestViewSubmitRequest extends SupportRequestViewEvents {
-  // TODO: Create event for submitting a support request
-  final SupportRequest supportRequest;
+// class SupportRequestViewSubmitRequest extends SupportRequestViewEvents {
+//   // TODO: Create event for submitting a support request
+//   final SupportRequest supportRequest;
 
-  SupportRequestViewSubmitRequest(this.supportRequest);
+//   SupportRequestViewSubmitRequest(this.supportRequest);
 
-  @override
-  List<Object?> get props => [supportRequest];
+//   @override
+//   List<Object?> get props => [supportRequest];
 
-  @override
-  bool get stringify => true;
-}
+//   @override
+//   bool get stringify => true;
+// }
