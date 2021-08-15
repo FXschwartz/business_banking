@@ -16,7 +16,6 @@ class SupportRequestFormScreen extends Screen {
 
   @override
   Widget build(BuildContext context) {
-    print('supportRequests: ${viewModel.allSupportRequests}');
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
