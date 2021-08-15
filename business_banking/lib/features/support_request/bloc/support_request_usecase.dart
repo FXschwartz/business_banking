@@ -19,16 +19,6 @@ class SupportRequestUseCase extends UseCase {
         .create<SupportRequestEntity>(
             SupportRequestEntity(), _notifySubscribers);
 
-    // if (_scopeSupportRequestEntity == null) {
-    //   final newSupportRequestEntity = SupportRequestEntity();
-    //   _scopeSupportRequestEntity = ExampleLocator()
-    //       .repository
-    //       .create<SupportRequestEntity>(
-    //           newSupportRequestEntity, _notifySubscribers);
-    // } else {
-    //   _scopeSupportRequestEntity!.subscription = _notifySubscribers;
-    // }
-
     await ExampleLocator().repository.runServiceAdapter(
         _scopeSupportRequestEntity!, SupportRequestServiceAdapter());
   }
@@ -41,14 +31,4 @@ class SupportRequestUseCase extends UseCase {
     _viewModelCallback(SupportRequestViewModel(
         allSupportRequests: supportRequestEntity.allSupportRequests!));
   }
-
-  // updateSupportRequestForm(String title, String email, String body) {
-  //   SupportRequestEntity supportRequestEntity =
-  //       ExampleLocator().repository.get(_scopeSupportRequestEntity!);
-
-  //   ExampleLocator().repository.update(_scopeSupportRequestEntity!,
-  //       supportRequestEntity.merge(title: title, email: email, body: body));
-
-  //   _viewModelCallback(buildViewModel(supportRequestEntity));
-  // }
 }

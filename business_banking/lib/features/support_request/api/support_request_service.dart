@@ -16,7 +16,6 @@ class SupportRequestService extends EitherService<JsonRequestModel,
   @override
   SupportRequestServiceResponseModel parseResponse(
       Map<String, dynamic> jsonResponse) {
-    // print('jsonResponse: ${jsonResponse}');
     return SupportRequestServiceResponseModel.fromJson(jsonResponse);
   }
 }

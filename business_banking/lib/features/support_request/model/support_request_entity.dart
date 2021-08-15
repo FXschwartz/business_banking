@@ -4,7 +4,6 @@ import 'package:clean_framework/clean_framework.dart';
 class SupportRequestEntity extends Entity {
   final List<SupportRequest>? allSupportRequests;
   SupportRequestEntity({
-    // TODO: Figure out if I need this errors field
     List<EntityFailure> errors = const [],
     List<SupportRequest>? allSupportRequests,
   })  : allSupportRequests = allSupportRequests ?? [],

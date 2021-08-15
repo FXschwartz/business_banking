@@ -14,10 +14,4 @@ class SupportRequestFormActions {
   void navigateBack(BuildContext context) async {
     CFRouterScope.of(context).popUntil(BusinessBankingRouter.hubRoute);
   }
-
-  // void updateSupportRequestForm(
-  //     BuildContext context, String title, String email, String body) {
-  //   bloc.supportRequestViewEventsPipe
-  //       .send(SupportRequestViewUpdateRequestEvent(title, email, body));
-  // }
 }

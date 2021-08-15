@@ -12,10 +12,6 @@ class SupportRequestBloc extends Bloc {
   SupportRequestBloc({
     SupportRequestUseCase? supportRequestUseCase,
   }) {
-    // supportRequestViewEventsPipe.receive.listen((event) {
-    //   supportRequestViewEventsPipeHandler(event);
-    // });
-
     _supportRequestUseCase = supportRequestUseCase ??
         SupportRequestUseCase((viewModel) => supportRequestViewModelPipe
             .send(viewModel as SupportRequestViewModel));
@@ -26,10 +22,4 @@ class SupportRequestBloc extends Bloc {
     supportRequestViewEventsPipe.dispose();
     supportRequestViewModelPipe.dispose();
   }
-
-  // supportRequestViewEventsPipeHandler(SupportRequestViewEvents event) {
-  //   // Figure out what kind of event it is and then handle it accordingly
-  //   print('supportRequestViewEventsPipeHandler() event: $event');
-  //   if (event is SupportRequestViewSubmitRequest) {}
-  // }
 }
