@@ -1,41 +1,29 @@
+import 'package:business_banking/features/support_request/model/support_request_view_model.dart';
 import 'package:clean_framework/clean_framework.dart';
 
 class SupportRequestEntity extends Entity {
-  final String title;
-  final String body;
-  final String email;
-
+  final List<SupportRequest>? allSupportRequests;
   SupportRequestEntity({
     // TODO: Figure out if I need this errors field
     List<EntityFailure> errors = const [],
-    String? title,
-    String? body,
-    String? email,
-  })  : title = title ?? '',
-        body = body ?? '',
-        email = email ?? '',
+    List<SupportRequest>? allSupportRequests,
+  })  : allSupportRequests = allSupportRequests ?? [],
         super(errors: errors);
 
   @override
   List<Object> get props => [
         errors,
-        title,
-        body,
-        email,
+        allSupportRequests!,
       ];
 
   @override
-  merge({
+  SupportRequestEntity merge({
     errors,
-    String? title,
-    String? body,
-    String? email,
+    List<SupportRequest>? allSupportRequests,
   }) {
     return SupportRequestEntity(
       errors: errors ?? this.errors,
-      title: title ?? this.title,
-      email: email ?? this.email,
-      body: body ?? this.body,
+      allSupportRequests: allSupportRequests ?? this.allSupportRequests,
     );
   }
 }

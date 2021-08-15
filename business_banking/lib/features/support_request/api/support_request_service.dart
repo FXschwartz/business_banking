@@ -10,12 +10,13 @@ class SupportRequestService extends EitherService<JsonRequestModel,
       : super(
           method: RestMethod.get,
           restApi: ExampleLocator().api,
-          path: 'support-request',
+          path: '/getAllSupportRequests',
         );
 
   @override
   SupportRequestServiceResponseModel parseResponse(
       Map<String, dynamic> jsonResponse) {
+    // print('jsonResponse: ${jsonResponse}');
     return SupportRequestServiceResponseModel.fromJson(jsonResponse);
   }
 }

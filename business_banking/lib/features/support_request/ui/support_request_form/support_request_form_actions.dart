@@ -20,20 +20,4 @@ class SupportRequestFormActions {
     bloc.supportRequestViewEventsPipe
         .send(SupportRequestViewUpdateRequestEvent(title, email, body));
   }
-
-  // TODO: Replace blow actions in favor of updateSupportRequestForm
-  void onUpdateSupportRequestEmail(BuildContext context, String email) {
-    bloc.supportRequestViewEventsPipe
-        .send(SupportRequestViewUpdateEmailRequestEvent(email));
-  }
-
-  void onUpdateSupportRequestTitle(BuildContext context, String title) {
-    bloc.supportRequestViewEventsPipe
-        .send(SupportRequestViewUpdateTitleRequestEvent(title));
-  }
-
-  void onUpdateSupportRequestBody(BuildContext context, String body) {
-    bloc.supportRequestViewEventsPipe
-        .send(SupportRequestViewUpdateBodyRequestEvent(body));
-  }
 }

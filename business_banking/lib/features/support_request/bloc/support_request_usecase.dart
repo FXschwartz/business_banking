@@ -34,51 +34,21 @@ class SupportRequestUseCase extends UseCase {
   }
 
   void _notifySubscribers(entity) {
-    _viewModelCallback(buildViewModel(entity));
+    buildViewModel(entity);
   }
 
-  SupportRequestViewModel buildViewModel(
-      SupportRequestEntity supportRequestEntity) {
-    print('buildViewModel email: ${supportRequestEntity.email}');
-    return SupportRequestViewModel(
-      title: supportRequestEntity.title,
-      body: supportRequestEntity.body,
-      email: supportRequestEntity.email,
-    );
+  buildViewModel(SupportRequestEntity supportRequestEntity) {
+    _viewModelCallback(SupportRequestViewModel(
+        allSupportRequests: supportRequestEntity.allSupportRequests!));
   }
 
-  updateSupportRequestForm(String title, String email, String body) {
-    SupportRequestEntity supportRequestEntity =
-        ExampleLocator().repository.get(_scopeSupportRequestEntity!);
+  // updateSupportRequestForm(String title, String email, String body) {
+  //   SupportRequestEntity supportRequestEntity =
+  //       ExampleLocator().repository.get(_scopeSupportRequestEntity!);
 
-    ExampleLocator().repository.update(_scopeSupportRequestEntity!,
-        supportRequestEntity.merge(title: title, email: email, body: body));
+  //   ExampleLocator().repository.update(_scopeSupportRequestEntity!,
+  //       supportRequestEntity.merge(title: title, email: email, body: body));
 
-    _viewModelCallback(buildViewModel(supportRequestEntity));
-  }
-
-  // TODO: Remove these in place of the updateSupportRequestForm method
-  updateSupportRequestEmail(String email) {
-    SupportRequestEntity supportRequestEntity =
-        ExampleLocator().repository.get(_scopeSupportRequestEntity!);
-    ExampleLocator().repository.update(
-        _scopeSupportRequestEntity!, supportRequestEntity.merge(email: email));
-    _viewModelCallback(buildViewModel(supportRequestEntity));
-  }
-
-  updateSupportRequestTitle(String title) {
-    SupportRequestEntity supportRequestEntity =
-        ExampleLocator().repository.get(_scopeSupportRequestEntity!);
-    ExampleLocator().repository.update(
-        _scopeSupportRequestEntity!, supportRequestEntity.merge(title: title));
-    _viewModelCallback(buildViewModel(supportRequestEntity));
-  }
-
-  updateSupportRequestBody(String body) {
-    SupportRequestEntity supportRequestEntity =
-        ExampleLocator().repository.get(_scopeSupportRequestEntity!);
-    ExampleLocator().repository.update(
-        _scopeSupportRequestEntity!, supportRequestEntity.merge(body: body));
-    _viewModelCallback(buildViewModel(supportRequestEntity));
-  }
+  //   _viewModelCallback(buildViewModel(supportRequestEntity));
+  // }
 }

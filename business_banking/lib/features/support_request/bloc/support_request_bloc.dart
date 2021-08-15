@@ -29,29 +29,7 @@ class SupportRequestBloc extends Bloc {
 
   supportRequestViewEventsPipeHandler(SupportRequestViewEvents event) {
     // Figure out what kind of event it is and then handle it accordingly
-    if (event is SupportRequestViewUpdateRequestEvent) {
-      _supportRequestUseCase!
-          .updateSupportRequestForm(event.title, event.email, event.body);
-    }
-    // TODO: Remove events below in favor of SupportRequestViewUpdateRequestEvent
-    if (event is SupportRequestViewUpdateEmailRequestEvent) {
-      print(
-          'SupportRequestViewUpdateEmailRequestEvent() event: ${event.email}');
-      _supportRequestUseCase!.updateSupportRequestEmail(event.email);
-      return;
-    }
-
-    if (event is SupportRequestViewUpdateTitleRequestEvent) {
-      print(
-          'SupportRequestViewUpdateTitleRequestEvent() event: ${event.title}');
-      _supportRequestUseCase!.updateSupportRequestTitle(event.title);
-      return;
-    }
-
-    if (event is SupportRequestViewUpdateBodyRequestEvent) {
-      print('SupportRequestViewUpdateBodyRequestEvent() event: ${event.body}');
-      _supportRequestUseCase!.updateSupportRequestBody(event.body);
-      return;
-    }
+    print('supportRequestViewEventsPipeHandler() event: $event');
+    if (event is SupportRequestViewSubmitRequest) {}
   }
 }

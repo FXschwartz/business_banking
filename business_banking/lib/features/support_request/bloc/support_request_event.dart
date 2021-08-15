@@ -21,41 +21,14 @@ class SupportRequestViewUpdateRequestEvent extends SupportRequestViewEvents {
   bool get stringify => true;
 }
 
-// TODO: Remove all of these in place of one event editing the entire form
-class SupportRequestViewUpdateTitleRequestEvent
-    extends SupportRequestViewEvents {
-  final String title;
+class SupportRequestViewSubmitRequest extends SupportRequestViewEvents {
+  // TODO: Create event for submitting a support request
+  final SupportRequest supportRequest;
 
-  SupportRequestViewUpdateTitleRequestEvent(this.title);
-
-  @override
-  List<Object?> get props => [title];
+  SupportRequestViewSubmitRequest(this.supportRequest);
 
   @override
-  bool get stringify => true;
-}
-
-class SupportRequestViewUpdateBodyRequestEvent
-    extends SupportRequestViewEvents {
-  final String body;
-
-  SupportRequestViewUpdateBodyRequestEvent(this.body);
-
-  @override
-  List<Object?> get props => [body];
-
-  @override
-  bool get stringify => true;
-}
-
-class SupportRequestViewUpdateEmailRequestEvent
-    extends SupportRequestViewEvents {
-  final String email;
-
-  SupportRequestViewUpdateEmailRequestEvent(this.email);
-
-  @override
-  List<Object?> get props => [email];
+  List<Object?> get props => [supportRequest];
 
   @override
   bool get stringify => true;

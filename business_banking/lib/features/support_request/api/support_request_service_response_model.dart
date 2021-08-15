@@ -1,19 +1,19 @@
+import 'package:business_banking/features/support_request/model/support_request_view_model.dart';
 import 'package:clean_framework/clean_framework_defaults.dart';
 
 class SupportRequestServiceResponseModel extends JsonResponseModel {
-  final String title;
-  final String body;
-  final String email;
+  final List<SupportRequest> allSupportRequests;
+
+  SupportRequestServiceResponseModel(this.allSupportRequests);
 
   SupportRequestServiceResponseModel.fromJson(Map<String, dynamic> json)
-      : title = json['title'] ?? '',
-        body = json['body'] ?? '',
-        email = json['email'] ?? '';
+      : allSupportRequests = (json['supportRequests'] as List)
+            .map((request) => new SupportRequest.fromJson(request))
+            .toList();
 
   @override
-  List<Object> get props => [
-        title,
-        body,
-        email,
-      ];
+  List<Object> get props => [allSupportRequests];
+
+  @override
+  bool get stringify => false;
 }

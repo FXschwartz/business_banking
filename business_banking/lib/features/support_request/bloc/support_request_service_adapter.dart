@@ -12,13 +12,10 @@ class SupportRequestServiceAdapter extends ServiceAdapter<
   SupportRequestServiceAdapter() : super(SupportRequestService());
 
   @override
-  SupportRequestEntity createEntity(
-      SupportRequestEntity supportRequestEntityModel,
+  SupportRequestEntity createEntity(SupportRequestEntity supportRequestEntity,
       SupportRequestServiceResponseModel responseModel) {
-    return supportRequestEntityModel.merge(
-      title: responseModel.title,
-      body: responseModel.body,
-      email: responseModel.email,
-    ) as SupportRequestEntity;
+    final SupportRequestEntity entity = supportRequestEntity.merge(
+        allSupportRequests: responseModel.allSupportRequests);
+    return entity;
   }
 }

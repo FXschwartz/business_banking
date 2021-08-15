@@ -16,6 +16,7 @@ class SupportRequestFormScreen extends Screen {
 
   @override
   Widget build(BuildContext context) {
+    print('supportRequests: ${viewModel.allSupportRequests}');
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
@@ -53,55 +54,97 @@ class SupportRequestFormScreen extends Screen {
                 SupportRequestInputTextField(
                   formFieldName: 'titleInput',
                   hintText: 'Title',
-                  initialValue: viewModel.title,
+                  initialValue: '',
                   onChanged: (value) {},
                 ),
                 SupportRequestInputTextField(
                     formFieldName: 'emailInput',
                     hintText: 'Email Address',
                     keyboardType: TextInputType.emailAddress,
-                    initialValue: viewModel.email,
+                    initialValue: '',
                     onChanged: (value) {}),
                 SupportRequestInputTextField(
                   formFieldName: 'bodyInput',
                   hintText: 'Description',
                   keyboardType: TextInputType.multiline,
                   maxTextLines: 10,
-                  initialValue: viewModel.body,
+                  initialValue: '',
                   onChanged: (value) {},
                 ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    OutlinedButton(
-                      key: Key('supportRequestFormSubmitButton'),
-                      child: Text(
-                        'Submit Request',
-                        style: TextStyle(
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 10.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      OutlinedButton(
+                        key: Key('supportRequestFormSubmitButton'),
+                        child: Text(
+                          'Submit Request',
+                          style: TextStyle(
                             color: Colors.green,
                             // fontWeight: FontWeight.bold,
-                            fontSize: 20),
+                            fontSize: 20,
+                          ),
+                        ),
+                        style: OutlinedButton.styleFrom(
+                            padding: EdgeInsets.all(10.0),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                            side: BorderSide(width: 2, color: Colors.green)),
+                        onPressed: () {
+                          // this.actions.navigateToSupportRequestForm(context);
+                          String? email = _supportRequestFormGlobalKey
+                              .currentState!.fields['emailInput']!.value;
+                          String? title = _supportRequestFormGlobalKey
+                              .currentState!.fields['titleInput']!.value;
+                          String? body = _supportRequestFormGlobalKey
+                              .currentState!.fields['bodyInput']!.value;
+                          print('body: $body');
+                          actions.updateSupportRequestForm(
+                              context, title!, email!, body!);
+                        },
                       ),
-                      style: OutlinedButton.styleFrom(
-                          padding: EdgeInsets.all(10.0),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          side: BorderSide(width: 2, color: Colors.green)),
-                      onPressed: () {
-                        // this.actions.navigateToSupportRequestForm(context);
-                        String? email = _supportRequestFormGlobalKey
-                            .currentState!.fields['emailInput']!.value;
-                        String? title = _supportRequestFormGlobalKey
-                            .currentState!.fields['titleInput']!.value;
-                        String? body = _supportRequestFormGlobalKey
-                            .currentState!.fields['bodyInput']!.value;
-                        print('body: $body');
-                        actions.updateSupportRequestForm(
-                            context, title!, email!, body!);
-                      },
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 10.0),
+                  child: Text(
+                      'Here are some previously submitted support requests'),
+                ),
+                Container(
+                  height:
+                      500, // TODO: Change this to just be an array of widgets instead of a listview
+                  child: ListView.separated(
+                    itemCount: viewModel.allSupportRequests.length,
+                    separatorBuilder: (_, index) => Divider(),
+                    itemBuilder: (_, index) => Card(
+                      key: Key('previousSupportRequest'),
+                      color: Colors.white,
+                      shadowColor: Colors.grey[500],
+                      elevation: 3.0,
+                      child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 20.0, horizontal: 20.0),
+                          child: Column(
+                            children: [
+                              Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(viewModel
+                                        .allSupportRequests[index].title)
+                                  ]),
+                              const Divider(
+                                thickness: 2,
+                              ),
+                              Row(children: [
+                                Text(viewModel.allSupportRequests[index].body)
+                              ]),
+                            ],
+                          )),
                     ),
-                  ],
-                )
+                  ),
+                ),
               ],
             ),
           ),
@@ -110,6 +153,15 @@ class SupportRequestFormScreen extends Screen {
     );
   }
 }
+
+// class AllSupportRequests extends StatelessWidget {
+//   const AllSupportRequests({ Key? key }) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return ListView.builder(itemBuilder: (_, index) => viewModel.;
+//   }
+// }
 
 class SupportRequestInputTextField extends StatelessWidget {
   final String formFieldName;
