@@ -1,3 +1,5 @@
+// @dart=2.9
+
 import 'package:business_banking/features/support_request/bloc/support_request_bloc.dart';
 import 'package:business_banking/features/support_request/bloc/support_request_event.dart';
 import 'package:business_banking/features/support_request/model/support_request_view_model.dart';

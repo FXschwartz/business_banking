@@ -4,8 +4,6 @@ import 'package:clean_framework/clean_framework_defaults.dart';
 class SupportRequestServiceResponseModel extends JsonResponseModel {
   final List<SupportRequest> allSupportRequests;
 
-  SupportRequestServiceResponseModel(this.allSupportRequests);
-
   SupportRequestServiceResponseModel.fromJson(Map<String, dynamic> json)
       : allSupportRequests = (json['supportRequests'] as List)
             .map((request) => new SupportRequest.fromJson(request))
@@ -13,7 +11,4 @@ class SupportRequestServiceResponseModel extends JsonResponseModel {
 
   @override
   List<Object> get props => [allSupportRequests];
-
-  @override
-  bool get stringify => false;
 }
