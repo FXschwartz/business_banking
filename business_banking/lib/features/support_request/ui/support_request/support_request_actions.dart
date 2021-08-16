@@ -4,12 +4,13 @@ import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/cupertino.dart';
 
 class SupportRequestActions {
-  final SupportRequestBloc bloc;
+  // Parameter is for testing only
+  final CFRouter? _router;
 
-  SupportRequestActions(this.bloc);
+  SupportRequestActions({CFRouter? router}) : _router = router;
 
   void navigateToSupportRequestForm(BuildContext context) {
-    CFRouterScope.of(context)
-        .push(BusinessBankingRouter.supportRequestFormRoute);
+    final router = _router ?? CFRouterScope.of(context);
+    router.push(BusinessBankingRouter.supportRequestFormRoute);
   }
 }

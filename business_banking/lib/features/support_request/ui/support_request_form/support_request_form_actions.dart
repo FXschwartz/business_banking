@@ -1,17 +1,15 @@
-import 'package:business_banking/features/support_request/bloc/support_request_bloc.dart';
-import 'package:business_banking/features/support_request/bloc/support_request_event.dart';
-import 'package:business_banking/features/support_request/model/support_request_view_model.dart';
 import 'package:business_banking/routes.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/cupertino.dart';
 
 class SupportRequestFormActions {
-  final SupportRequestBloc bloc;
-  final SupportRequestViewModel viewModel;
+  // Parameter is for testing only
+  final CFRouter? _router;
 
-  SupportRequestFormActions(this.bloc, this.viewModel);
+  SupportRequestFormActions({CFRouter? router}) : _router = router;
 
   void navigateBack(BuildContext context) async {
-    CFRouterScope.of(context).popUntil(BusinessBankingRouter.hubRoute);
+    final router = _router ?? CFRouterScope.of(context);
+    router.popUntil(BusinessBankingRouter.hubRoute);
   }
 }

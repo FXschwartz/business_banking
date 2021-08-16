@@ -18,7 +18,7 @@ class SupportRequestPresenter extends Presenter<SupportRequestBloc,
       SupportRequestBloc bloc, SupportRequestViewModel viewModel) {
     return SupportRequestScreen(
       viewModel: viewModel,
-      actions: SupportRequestActions(bloc),
+      actions: SupportRequestActions(),
     );
   }
 }
